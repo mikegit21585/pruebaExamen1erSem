@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.*
@@ -20,12 +21,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pruebaexamen.ui.theme.PruebaExamenTheme
+import com.example.pruebaexamen.components.*
 import com.example.finanzasapp.models.user
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContent {
             PruebaExamenTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -83,7 +86,10 @@ fun HomeScreen() {
 
                     Column {
 
-                        Text("Hola ${user.name}", fontWeight = FontWeight.Bold)
+                        Text(
+                            text = "Hola ${user.name}",
+                            fontWeight = FontWeight.Bold
+                        )
 
                         Text("Bienvenido")
                     }
@@ -91,7 +97,48 @@ fun HomeScreen() {
 
                 IconButton(onClick = {}) {
 
-                    Icon(Icons.Default.Menu, contentDescription = "")
+                    Icon(
+                        imageVector = Icons.Default.Menu,
+                        contentDescription = "Menu"
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+
+                SummaryCardItemGreen(
+                    title = "Actividad",
+                    amount = "de la Semana",
+                    color = Color(0xFFDDE8E4),
+                    icon = Icons.Default.Face,
+                    modifier = Modifier
+                        .weight(1f)
+                        .height(200.dp)
+                )
+
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+
+                    SummaryCardItem(
+                        title = "Ventas",
+                        amount = "$280.99",
+                        color = Color(0xFFE7D7C9),
+                        modifier = Modifier.height(95.dp)
+                    )
+
+                    SummaryCardItem(
+                        title = "Ganancias",
+                        amount = "$280.99",
+                        color = Color(0xFFD9D3F0),
+                        modifier = Modifier.height(95.dp)
+                    )
                 }
             }
         }
@@ -100,7 +147,7 @@ fun HomeScreen() {
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun PreviewHome() {
     PruebaExamenTheme {
         HomeScreen()
     }
